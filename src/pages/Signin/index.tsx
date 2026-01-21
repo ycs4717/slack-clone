@@ -1,4 +1,4 @@
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import '../Signup/auth.css';
 import { useState } from 'react';
 import { authRepository } from '../../modules/auth/auth.repository';
@@ -8,12 +8,23 @@ function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { currentUser, setCurrentUser } = useCurrentUserStore();
+  const navigate = useNavigate();
 
   const signin = async () => {
-    if (email == '' || password == '') return;
-    const { user, token } = await authRepository.signin(email, password);
-    localStorage.setItem('token', token);
-    setCurrentUser(user);
+    try {
+      if (email == '' || password == '') return;
+      const { user, token } = await authRepository.signin(email, password);
+      localStorage.setItem('token', token);
+      const status = await authRepository.checkPasskey(email);
+      setCurrentUser(user);
+      if (status === 1) {
+        navigate('/create-passkey');
+      } else {
+        navigate('/');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   if (currentUser != null) return <Navigate to="/" />;

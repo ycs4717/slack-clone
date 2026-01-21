@@ -29,4 +29,16 @@ export const authRepository = {
 
     return new User(result.data);
   },
+  async checkPasskey(email: string): Promise<number> {
+    const result = await api.get('/auth/passkey/status', { params: { email } });
+    // server expected to return { status: 0 | 1 }
+    return result.data.status;
+  },
+  async createPasskey(): Promise<void> {
+    // Placeholder endpoint - implement WebAuthn registration flow as needed
+    await api.post('/auth/passkey/create');
+  },
+  async skipPasskey(): Promise<void> {
+    await api.post('/auth/passkey/skip');
+  },
 };

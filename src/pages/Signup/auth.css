@@ -130,3 +130,46 @@
 .signin-link a:hover {
   text-decoration: underline;
 }
+
+/* Passkey modal / page */
+.passkey-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.passkey-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  text-align: center;
+}
+
+.passkey-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.passkey-primary {
+  background-color: #1d1c1d;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.passkey-secondary {
+  border: 1px solid #dddddd;
+  background-color: white;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
